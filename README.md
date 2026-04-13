@@ -52,4 +52,4 @@ Si deseas clonar este proyecto y trabajar en él localmente:
 Este proyecto es propiedad de **JOYJOS**. Todos los derechos reservados.
 
 ---
-*Desarrollado con ❤️ por JOYJOS AI Automation.*
+*Desarrollado con ❤️ por JOYJOS.*
