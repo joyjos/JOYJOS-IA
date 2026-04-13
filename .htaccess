@@ -1,0 +1,70 @@
+# ==============================================
+# .htaccess ULTRA PRO para JOYJOS
+# ==============================================
+
+ErrorDocument 404 /error404.html 
+
+# 1️⃣ Activar motor de reescritura
+RewriteEngine On
+
+# 2️⃣ Redirigir HTTP a HTTPS (Global)
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# 3️⃣ Redirigir www → sin www (HTTPS)
+RewriteCond %{HTTP_HOST} ^www\.joyjos\.eu$ [NC]
+RewriteRule ^(.*)$ https://joyjos.eu/$1 [L,R=301]
+
+# 4️⃣ Evitar hotlinking de imágenes
+RewriteCond %{HTTP_REFERER} !^$
+RewriteCond %{HTTP_REFERER} !^https://joyjos.eu/ [NC]
+RewriteRule \.(jpg|jpeg|png|gif|webp)$ - [F,NC,L]
+
+# 5️⃣ Compresión Gzip para archivos comunes
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/json
+</IfModule>
+
+# 6️⃣ Cacheo de navegador para recursos estáticos (1 año para imágenes, CSS, JS)
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType image/gif "access plus 1 year"
+  ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType image/svg+xml "access plus 1 year"
+  ExpiresByType image/x-icon "access plus 1 year"
+  ExpiresByType text/css "access plus 1 year"
+  ExpiresByType text/javascript "access plus 1 year"
+  ExpiresByType application/javascript "access plus 1 year"
+  ExpiresByType application/json "access plus 1 year"
+</IfModule>
+
+# 7️⃣ Cabeceras de Seguridad Reforzadas
+<IfModule mod_headers.c>
+  # Enforce HTTPS (HSTS) - 1 año incl. subdominios y preload
+  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+  
+  # Evitar clickjacking
+  Header always append X-Frame-Options SAMEORIGIN
+  
+  # Evitar sniffing de tipo de contenido
+  Header set X-Content-Type-Options nosniff
+  
+  # Referrer Policy: privacidad al navegar hacia fuera
+  Header set Referrer-Policy "strict-origin-when-cross-origin"
+  
+  # Content Security Policy (CSP) - Blindaje Total
+  # NOTA: Sin 'unsafe-inline' en scripts porque se han movido a assets/main.js
+  Header set Content-Security-Policy "default-src 'self'; script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https:; connect-src 'self' https://www.google-analytics.com; frame-ancestors 'none'; object-src 'none';"
+  
+  # Permissions Policy: Deshabilitar acceso a hardware innecesario
+  Header set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=()"
+</IfModule>
+
+# 8️⃣ Deshabilitar firmas del servidor y listado de directorios
+Options -Indexes
+ServerSignature Off
+
+# 9️⃣ Evitar bucles de redirección
+RewriteCond %{ENV:REDIRECT_STATUS} ^$

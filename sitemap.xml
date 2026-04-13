@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="https://www.google.com/schemas/sitemap-image/1.1">
+
+  <url>
+    <loc>https://joyjos.eu/</loc>
+    <lastmod>2026-04-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://joyjos.eu/assets/og_image.png</image:loc>
+      <image:caption>JOYJOS - Automatización e IA para tu negocio</image:caption>
+      <image:title>JOYJOS</image:title>
+    </image:image>
+  </url>
+
+</urlset>
