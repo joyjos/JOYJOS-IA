@@ -40,9 +40,5 @@
         }
       ]
     }
-  ],
-  "routes": [
-    { "handle": "filesystem" },
-    { "src": "/(.*)", "status": 404, "dest": "/error404.html" }
   ]
 }
