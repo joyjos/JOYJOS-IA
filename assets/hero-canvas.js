@@ -35,15 +35,16 @@
     particleMaxSpeed: 0.7,
 
     // Movement
-    nodeSpeed: 0.35,       // Slower, more elegant flow
-    nodeDrift: 0.0003,
-    nodeFriction: 0.985,   
-    maxVelocity: 3.5,      // Capped for smoothness
+    nodeSpeed: 0.18,       // Extremely slow default drift
+    nodeDrift: 0.0002,
+    nodeFriction: 0.98,   
+    maxVelocity: 4,      
 
     // Mouse Interaction
-    mouseRepelRadius: 220, 
-    mouseForce: 0.12,      
-    mouseConnectRadius: 320, 
+    mouseRepelRadius: 200, 
+    mouseForce: 0.1,       
+    mouseConnectRadius: 350, 
+    mouseAgitation: 0.25,   // Extra speed when mouse is near
 
     // Colors
     hueMin: 195,
@@ -262,16 +263,27 @@
       n.vx += Math.sin(elapsed * CONFIG.nodeDrift + n.phase) * 0.02;
       n.vy += Math.cos(elapsed * CONFIG.nodeDrift + n.phase * 1.3) * 0.02;
 
-      // Mouse Repulsion
+      // Mouse Interaction: Repulsion + Agitation
       if (mouse.active) {
         const dx = n.x - mouse.x;
         const dy = n.y - mouse.y;
         const distSq = dx * dx + dy * dy;
-        if (distSq < repelRadiusSq && distSq > 0) {
+        const agitationRadiusSq = CONFIG.mouseConnectRadius * CONFIG.mouseConnectRadius;
+
+        if (distSq < agitationRadiusSq) {
           const dist = Math.sqrt(distSq);
-          const force = (CONFIG.mouseRepelRadius - dist) / CONFIG.mouseRepelRadius;
-          n.vx += (dx / dist) * force * CONFIG.mouseForce;
-          n.vy += (dy / dist) * force * CONFIG.mouseForce;
+          const forceFactor = (CONFIG.mouseConnectRadius - dist) / CONFIG.mouseConnectRadius;
+          
+          // Repulsion (if within repel radius)
+          if (dist < CONFIG.mouseRepelRadius) {
+            const repelForce = (CONFIG.mouseRepelRadius - dist) / CONFIG.mouseRepelRadius;
+            n.vx += (dx / dist) * repelForce * CONFIG.mouseForce;
+            n.vy += (dy / dist) * repelForce * CONFIG.mouseForce;
+          }
+
+          // Agitation: Increase velocity when near mouse
+          n.vx += (n.vx / (Math.abs(n.vx) || 1)) * forceFactor * CONFIG.mouseAgitation;
+          n.vy += (n.vy / (Math.abs(n.vy) || 1)) * forceFactor * CONFIG.mouseAgitation;
         }
       }
 
