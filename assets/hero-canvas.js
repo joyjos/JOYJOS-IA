@@ -31,14 +31,14 @@
     particleCount: 60,
     particleMinRadius: 1,
     particleMaxRadius: 2.5,
-    particleMinSpeed: 0.2,
-    particleMaxSpeed: 0.7,
+    particleMinSpeed: 0.05,
+    particleMaxSpeed: 0.2,
 
     // Movement
-    nodeSpeed: 0.18,       // Extremely slow default drift
-    nodeDrift: 0.0002,
-    nodeFriction: 0.98,   
-    maxVelocity: 4,      
+    nodeSpeed: 0.06,       // Almost static
+    nodeDrift: 0.0001,
+    nodeFriction: 0.97,   
+    maxVelocity: 3,      
 
     // Mouse Interaction
     mouseRepelRadius: 200, 
@@ -260,8 +260,8 @@
       const n = nodes[i];
       
       // Movement: Natural drift + Velocity
-      n.vx += Math.sin(elapsed * CONFIG.nodeDrift + n.phase) * 0.02;
-      n.vy += Math.cos(elapsed * CONFIG.nodeDrift + n.phase * 1.3) * 0.02;
+      n.vx += Math.sin(elapsed * CONFIG.nodeDrift + n.phase) * 0.005;
+      n.vy += Math.cos(elapsed * CONFIG.nodeDrift + n.phase * 1.3) * 0.005;
 
       // Mouse Interaction: Repulsion + Agitation
       if (mouse.active) {
