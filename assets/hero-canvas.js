@@ -1,11 +1,10 @@
 /**
  * JOYJOS Hero Canvas — Neural Network / Data Flow Animation
  * 
- * Updates:
- * - Real wave (S-curve) connections using bezier curves
- * - Mouse interaction (repulsion and connections)
- * - Higher node count & visibility
- * - Mobile reduction (performance)
+ * Optimized Premium Version:
+ * - Pre-rendered Glow: Nodes are drawn once and cached for speed.
+ * - S-Curve Connections: Restored the organic wave movement.
+ * - Intersection Observer: Zero CPU usage when out of view.
  */
 ;(function () {
   'use strict';
@@ -13,44 +12,45 @@
   // ── Configuration ──────────────────────────────────────────
   const CONFIG = {
     // Density & Count
-    nodeDensity: 0.8,      // Increased density
-    maxNodes: 120,         // Increased max
+    nodeDensity: 0.8,      
+    maxNodes: 120,         
     minNodes: 30,
 
     // Node appearance
-    nodeMinRadius: 2,
-    nodeMaxRadius: 6,
-    nodeGlowMin: 8,
-    nodeGlowMax: 25,
-    nodeBaseAlpha: 0.8,    // Make nodes more visible
+    nodeMinRadius: 1.5,
+    nodeMaxRadius: 4.5,
+    nodeGlowSize: 20,
+    nodeBaseAlpha: 0.8,
 
     // Connections
     connectionDistance: 220,
     maxConnectionsPerNode: 4,
-    connectionLineWidth: 0.8,
+    connectionLineWidth: 0.7,
 
     // Particles
-    particleCount: 80,
+    particleCount: 60,
     particleMinRadius: 1,
     particleMaxRadius: 2.5,
     particleMinSpeed: 0.2,
-    particleMaxSpeed: 0.8,
+    particleMaxSpeed: 0.7,
 
     // Movement
-    nodeSpeed: 0.4,
+    nodeSpeed: 0.6,        
     nodeDrift: 0.0005,
+    nodeFriction: 0.985,   
+    maxVelocity: 4.5,      // Reduced to keep movement smooth
 
     // Mouse Interaction
-    mouseRepelRadius: 250, // Increased radius
-    mouseForce: 0.8,       // Increased force
-    mouseConnectRadius: 350, // Reach out further
+    mouseRepelRadius: 220, 
+    mouseForce: 0.12,      // Even softer repulsion
+    mouseConnectRadius: 320, // Slightly larger reach for interaction
 
     // Colors
     hueMin: 195,
     hueMax: 210,
     saturation: 90,
-    lightnessNode: 70,
-    lightnessParticle: 75,
+    lightnessNode: 75,
+    lightnessParticle: 80,
     lightnessLine: 60,
   };
 
@@ -62,6 +62,8 @@
   let animationId = null;
   let lastTime = 0;
   let elapsed = 0;
+  let isVisible = true;
+  let nodeCache = {}; // Cache for pre-rendered nodes
 
   let mouse = { x: -1000, y: -1000, active: false };
 
@@ -71,12 +73,51 @@
   }
 
   function hsl(h, s, l, a) {
-    return 'hsla(' + h + ',' + s + '%,' + l + '%,' + a + ')';
+    return 'hsla(' + Math.floor(h) + ',' + s + '%,' + l + '%,' + a.toFixed(2) + ')';
+  }
+
+  // ── Pre-rendering ──────────────────────────────────────────
+  function preRenderNode(hue) {
+    const size = (CONFIG.nodeMaxRadius + CONFIG.nodeGlowSize) * 2 * dpr;
+    const cacheCanvas = document.createElement('canvas');
+    cacheCanvas.width = size;
+    cacheCanvas.height = size;
+    const cctx = cacheCanvas.getContext('2d');
+    
+    const centerX = size / 2;
+    const centerY = size / 2;
+    const radius = CONFIG.nodeMaxRadius * dpr;
+    const glow = CONFIG.nodeGlowSize * dpr;
+
+    // Glow
+    const gradient = cctx.createRadialGradient(centerX, centerY, radius, centerX, centerY, radius + glow);
+    gradient.addColorStop(0, hsl(hue, CONFIG.saturation, CONFIG.lightnessNode, 0.3));
+    gradient.addColorStop(1, hsl(hue, CONFIG.saturation, CONFIG.lightnessNode, 0));
+    
+    cctx.fillStyle = gradient;
+    cctx.beginPath();
+    cctx.arc(centerX, centerY, radius + glow, 0, Math.PI * 2);
+    cctx.fill();
+
+    // Core
+    cctx.fillStyle = hsl(hue, CONFIG.saturation, CONFIG.lightnessNode, 1);
+    cctx.beginPath();
+    cctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
+    cctx.fill();
+
+    return cacheCanvas;
+  }
+
+  function getCachedNode(hue) {
+    const h = Math.floor(hue);
+    if (!nodeCache[h]) nodeCache[h] = preRenderNode(h);
+    return nodeCache[h];
   }
 
   // ── Node & Particle ────────────────────────────────────────
   function createNode() {
     const r = rand(CONFIG.nodeMinRadius, CONFIG.nodeMaxRadius);
+    const h = rand(CONFIG.hueMin, CONFIG.hueMax);
     return {
       x: rand(0, width),
       y: rand(0, height),
@@ -84,10 +125,9 @@
       baseRadius: r,
       vx: rand(-CONFIG.nodeSpeed, CONFIG.nodeSpeed),
       vy: rand(-CONFIG.nodeSpeed, CONFIG.nodeSpeed),
-      hue: rand(CONFIG.hueMin, CONFIG.hueMax),
-      glowRadius: rand(CONFIG.nodeGlowMin, CONFIG.nodeGlowMax),
+      hue: h,
       phase: rand(0, Math.PI * 2),
-      pulseSpeed: rand(0.005, 0.02),
+      pulseSpeed: rand(0.005, 0.015),
     };
   }
 
@@ -99,10 +139,10 @@
       speed: rand(CONFIG.particleMinSpeed, CONFIG.particleMaxSpeed),
       angle: rand(0, Math.PI * 2),
       hue: rand(190, 220),
-      alpha: rand(0.3, 0.8),
-      drift: rand(-0.005, 0.005),
+      alpha: rand(0.3, 0.7),
+      drift: rand(-0.004, 0.004),
       life: rand(0, 1),
-      lifeSpeed: rand(0.002, 0.008),
+      lifeSpeed: rand(0.002, 0.006),
     };
   }
 
@@ -111,20 +151,28 @@
     canvas = document.getElementById('hero-canvas');
     if (!canvas) return;
 
-    ctx = canvas.getContext('2d');
+    ctx = canvas.getContext('2d', { alpha: true });
     resize();
 
     populateNodes();
     populateParticles();
 
-    window.addEventListener('resize', debounce(onResize, 250));
-    document.addEventListener('visibilitychange', onVisibility);
+    setupInteractions();
+    setupVisibility();
 
-    // Mouse Tracking (Listen on window to bypass DOM overlays)
+    lastTime = performance.now();
+    startLoop();
+  }
+
+  function setupInteractions() {
+    window.addEventListener('resize', debounce(onResize, 300));
     window.addEventListener('mousemove', (e) => {
+      if (!isVisible) return;
       const rect = canvas.getBoundingClientRect();
-      // Only track if mouse is over the hero section (roughly)
-      if (e.clientY >= rect.top && e.clientY <= rect.bottom) {
+      
+      // Strict bounds check for both X and Y
+      if (e.clientX >= rect.left && e.clientX <= rect.right &&
+          e.clientY >= rect.top && e.clientY <= rect.bottom) {
         mouse.x = e.clientX - rect.left;
         mouse.y = e.clientY - rect.top;
         mouse.active = true;
@@ -132,37 +180,42 @@
         mouse.active = false;
       }
     });
-    
     document.addEventListener('mouseleave', () => {
       mouse.active = false;
     });
+  }
 
-    lastTime = performance.now();
-    loop(lastTime);
+  function setupVisibility() {
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) stopLoop();
+      else startLoop();
+    });
+
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          isVisible = entry.isIntersecting;
+          if (isVisible) startLoop();
+          else stopLoop();
+        });
+      }, { threshold: 0.01 });
+      observer.observe(canvas);
+    }
   }
 
   function populateNodes() {
     const area = width * height;
     let count = Math.floor(area / 100000 * CONFIG.nodeDensity);
-    
-    // Mobile reduction: if width is small, reduce nodes by half
     if (width < 768) count = Math.floor(count * 0.5);
-    
     count = Math.max(CONFIG.minNodes, Math.min(CONFIG.maxNodes, count));
-    nodes = [];
-    for (let i = 0; i < count; i++) {
-      nodes.push(createNode());
-    }
+    nodes = Array.from({ length: count }, createNode);
+    nodeCache = {}; // Clear cache on resize
   }
 
   function populateParticles() {
     let count = CONFIG.particleCount;
-    if (width < 768) count = Math.floor(count * 0.5); // Mobile reduction
-    
-    particles = [];
-    for (let i = 0; i < count; i++) {
-      particles.push(createParticle());
-    }
+    if (width < 768) count = Math.floor(count * 0.5);
+    particles = Array.from({ length: count }, createParticle);
   }
 
   function resize() {
@@ -174,7 +227,7 @@
     canvas.height = height * dpr;
     canvas.style.width = width + 'px';
     canvas.style.height = height + 'px';
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.scale(dpr, dpr);
   }
 
   function onResize() {
@@ -183,94 +236,87 @@
     populateParticles();
   }
 
-  function onVisibility() {
-    if (document.hidden) {
+  function startLoop() {
+    if (!animationId && !document.hidden && isVisible) {
+      lastTime = performance.now();
+      animationId = requestAnimationFrame(loop);
+    }
+  }
+
+  function stopLoop() {
+    if (animationId) {
       cancelAnimationFrame(animationId);
       animationId = null;
-    } else {
-      lastTime = performance.now();
-      loop(lastTime);
     }
   }
 
   // ── Update ─────────────────────────────────────────────────
   function update(dt) {
     elapsed += dt;
+    const repelRadiusSq = CONFIG.mouseRepelRadius * CONFIG.mouseRepelRadius;
 
-    // Nodes
     for (let i = 0; i < nodes.length; i++) {
       const n = nodes[i];
-
-      // Natural Drift
-      n.vx += Math.sin(elapsed * CONFIG.nodeDrift + n.phase) * 0.01;
-      n.vy += Math.cos(elapsed * CONFIG.nodeDrift + n.phase * 1.3) * 0.01;
+      
+      // Movement: Natural drift + Velocity
+      n.vx += Math.sin(elapsed * CONFIG.nodeDrift + n.phase) * 0.02;
+      n.vy += Math.cos(elapsed * CONFIG.nodeDrift + n.phase * 1.3) * 0.02;
 
       // Mouse Repulsion
       if (mouse.active) {
         const dx = n.x - mouse.x;
         const dy = n.y - mouse.y;
         const distSq = dx * dx + dy * dy;
-        const repelRadiusSq = CONFIG.mouseRepelRadius * CONFIG.mouseRepelRadius;
-        
         if (distSq < repelRadiusSq && distSq > 0) {
-          const distance = Math.sqrt(distSq);
-          const force = (CONFIG.mouseRepelRadius - distance) / CONFIG.mouseRepelRadius;
-          n.vx += (dx / distance) * force * CONFIG.mouseForce;
-          n.vy += (dy / distance) * force * CONFIG.mouseForce;
+          const dist = Math.sqrt(distSq);
+          const force = (CONFIG.mouseRepelRadius - dist) / CONFIG.mouseRepelRadius;
+          n.vx += (dx / dist) * force * CONFIG.mouseForce;
+          n.vy += (dy / dist) * force * CONFIG.mouseForce;
         }
       }
 
-      // Clamp Velocity
-      const maxV = CONFIG.nodeSpeed * 2.5;
-      n.vx = Math.max(-maxV, Math.min(maxV, n.vx));
-      n.vy = Math.max(-maxV, Math.min(maxV, n.vy));
-
       n.x += n.vx;
       n.y += n.vy;
+      
+      // Apply subtle friction only to keep things under control
+      n.vx *= CONFIG.nodeFriction;
+      n.vy *= CONFIG.nodeFriction;
 
-      // Pulsing
+      // Ensure a minimum speed so they don't stop
+      const speedSq = n.vx * n.vx + n.vy * n.vy;
+      const minSpeed = CONFIG.nodeSpeed;
+      if (speedSq < minSpeed * minSpeed) {
+        const speed = Math.sqrt(speedSq) || 0.1;
+        n.vx = (n.vx / speed) * minSpeed;
+        n.vy = (n.vy / speed) * minSpeed;
+      }
+
+      // Cap velocity
+      if (speedSq > CONFIG.maxVelocity * CONFIG.maxVelocity) {
+        const speed = Math.sqrt(speedSq);
+        n.vx = (n.vx / speed) * CONFIG.maxVelocity;
+        n.vy = (n.vy / speed) * CONFIG.maxVelocity;
+      }
+
       n.phase += n.pulseSpeed;
       n.radius = n.baseRadius + Math.sin(n.phase) * n.baseRadius * 0.4;
 
       // Edge Wrap
-      const pad = 50;
-      if (n.x < -pad) n.x = width + pad;
-      if (n.x > width + pad) n.x = -pad;
-      if (n.y < -pad) n.y = height + pad;
-      if (n.y > height + pad) n.y = -pad;
+      const buffer = 40; 
+      if (n.x < -buffer) n.x = width + buffer;
+      else if (n.x > width + buffer) n.x = -buffer;
+      
+      if (n.y < -buffer) n.y = height + buffer;
+      else if (n.y > height + buffer) n.y = -buffer;
     }
 
-    // Particles
     for (let i = 0; i < particles.length; i++) {
       const p = particles[i];
-
       p.angle += p.drift;
       p.x += Math.cos(p.angle) * p.speed;
       p.y += Math.sin(p.angle) * p.speed;
-
-      // Repel particles slightly too
-      if (mouse.active) {
-        const dx = p.x - mouse.x;
-        const dy = p.y - mouse.y;
-        const distSq = dx * dx + dy * dy;
-        if (distSq < 10000) { // 100px radius
-          p.x += (dx * 0.01);
-          p.y += (dy * 0.01);
-        }
-      }
-
       p.life += p.lifeSpeed;
-      if (p.life > 1) {
-        p.life = 0;
-        p.x = rand(0, width);
-        p.y = Math.random() > 0.5 ? -10 : height + 10;
-        p.angle = rand(0, Math.PI * 2);
-      }
-
-      if (p.x < -20) p.x = width + 20;
-      if (p.x > width + 20) p.x = -20;
-      if (p.y < -20) p.y = height + 20;
-      if (p.y > height + 20) p.y = -20;
+      if (p.life > 1) { p.life = 0; p.x = rand(0, width); p.y = rand(0, height); }
     }
   }
 
@@ -278,80 +324,64 @@
   function draw() {
     ctx.clearRect(0, 0, width, height);
     drawConnections();
-    drawMouseConnections();
+    if (mouse.active) drawMouseConnections();
     drawNodes();
     drawParticles();
   }
 
   function drawConnections() {
     const maxDistSq = CONFIG.connectionDistance * CONFIG.connectionDistance;
+    ctx.lineWidth = CONFIG.connectionLineWidth;
 
     for (let i = 0; i < nodes.length; i++) {
       let connections = 0;
       const a = nodes[i];
-
       for (let j = i + 1; j < nodes.length; j++) {
         if (connections >= CONFIG.maxConnectionsPerNode) break;
-
         const b = nodes[j];
         const dx = a.x - b.x;
         const dy = a.y - b.y;
         const dSq = dx * dx + dy * dy;
 
-        if (dSq > maxDistSq) continue;
+        if (dSq < maxDistSq) {
+          const dist = Math.sqrt(dSq);
+          const alpha = (1 - dist / CONFIG.connectionDistance) * 0.45;
+          if (alpha < 0.02) continue;
+          connections++;
 
-        const d = Math.sqrt(dSq);
-        const alpha = (1 - d / CONFIG.connectionDistance) * 0.5; // Increased line visibility
+          const perpAngle = Math.atan2(dy, dx) + Math.PI / 2;
+          const wavePhase = elapsed * 0.0012 + i + j; 
+          const amp = dist * 0.12;
 
-        if (alpha < 0.02) continue;
+          const cp1x = a.x - dx * 0.33 + Math.cos(perpAngle) * Math.sin(wavePhase) * amp;
+          const cp1y = a.y - dy * 0.33 + Math.sin(perpAngle) * Math.sin(wavePhase) * amp;
+          const cp2x = a.x - dx * 0.66 + Math.cos(perpAngle) * Math.sin(wavePhase + Math.PI) * amp;
+          const cp2y = a.y - dy * 0.66 + Math.sin(perpAngle) * Math.sin(wavePhase + Math.PI) * amp;
 
-        connections++;
-
-        // Real Wave calculation (S-curve using bezierCurveTo)
-        const perpAngle = Math.atan2(dy, dx) + Math.PI / 2;
-        const wavePhase = elapsed * 0.0015 + i + j; 
-        const amp = d * 0.15; // Wave amplitude relative to line length
-
-        // Control point 1
-        const cp1x = a.x - dx * 0.33 + Math.cos(perpAngle) * Math.sin(wavePhase) * amp;
-        const cp1y = a.y - dy * 0.33 + Math.sin(perpAngle) * Math.sin(wavePhase) * amp;
-        
-        // Control point 2 (inverse wave phase)
-        const cp2x = a.x - dx * 0.66 + Math.cos(perpAngle) * Math.sin(wavePhase + Math.PI) * amp;
-        const cp2y = a.y - dy * 0.66 + Math.sin(perpAngle) * Math.sin(wavePhase + Math.PI) * amp;
-
-        const avgHue = (a.hue + b.hue) / 2;
-
-        ctx.beginPath();
-        ctx.moveTo(a.x, a.y);
-        ctx.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, b.x, b.y);
-        ctx.strokeStyle = hsl(avgHue, CONFIG.saturation, CONFIG.lightnessLine, alpha);
-        ctx.lineWidth = CONFIG.connectionLineWidth;
-        ctx.stroke();
+          ctx.strokeStyle = hsl((a.hue + b.hue) / 2, CONFIG.saturation, CONFIG.lightnessLine, alpha);
+          ctx.beginPath();
+          ctx.moveTo(a.x, a.y);
+          ctx.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, b.x, b.y);
+          ctx.stroke();
+        }
       }
     }
   }
 
   function drawMouseConnections() {
-    if (!mouse.active) return;
-    
     const maxDistSq = CONFIG.mouseConnectRadius * CONFIG.mouseConnectRadius;
-    
     for (let i = 0; i < nodes.length; i++) {
       const n = nodes[i];
       const dx = n.x - mouse.x;
       const dy = n.y - mouse.y;
       const dSq = dx * dx + dy * dy;
-
       if (dSq < maxDistSq) {
-        const d = Math.sqrt(dSq);
-        const alpha = (1 - d / CONFIG.mouseConnectRadius) * 0.8; // Increased brightness
-        
+        const alpha = (1 - Math.sqrt(dSq) / CONFIG.mouseConnectRadius) * 0.9; // More visible
+        ctx.strokeStyle = hsl(195, 100, 90, alpha); // Brighter (L90)
+        ctx.lineWidth = 1.2;
         ctx.beginPath();
         ctx.moveTo(n.x, n.y);
         ctx.lineTo(mouse.x, mouse.y);
-        ctx.strokeStyle = hsl(190, 100, 80, alpha); 
-        ctx.lineWidth = 1.5; // Thicker line
         ctx.stroke();
       }
     }
@@ -360,72 +390,43 @@
   function drawNodes() {
     for (let i = 0; i < nodes.length; i++) {
       const n = nodes[i];
-      const pulseAlpha = CONFIG.nodeBaseAlpha + Math.sin(n.phase) * 0.2;
-      const color = hsl(n.hue, CONFIG.saturation, CONFIG.lightnessNode, pulseAlpha);
-
-      // Inner Core
-      ctx.beginPath();
-      ctx.arc(n.x, n.y, n.radius, 0, Math.PI * 2);
-      ctx.fillStyle = color;
-      ctx.fill();
-
-      // Outer Glow
-      const glowAlpha = 0.2 + Math.sin(n.phase) * 0.1;
-      const gradient = ctx.createRadialGradient(n.x, n.y, n.radius, n.x, n.y, n.radius + n.glowRadius);
-      gradient.addColorStop(0, hsl(n.hue, CONFIG.saturation, CONFIG.lightnessNode, glowAlpha));
-      gradient.addColorStop(1, hsl(n.hue, CONFIG.saturation, CONFIG.lightnessNode, 0));
+      const alpha = CONFIG.nodeBaseAlpha + Math.sin(n.phase) * 0.15;
+      const img = getCachedNode(n.hue);
+      const size = img.width / dpr;
       
-      ctx.beginPath();
-      ctx.arc(n.x, n.y, n.radius + n.glowRadius, 0, Math.PI * 2);
-      ctx.fillStyle = gradient;
-      ctx.fill();
+      ctx.globalAlpha = alpha;
+      ctx.drawImage(img, n.x - size / 2, n.y - size / 2, size, size);
+      ctx.globalAlpha = 1;
     }
   }
 
   function drawParticles() {
     for (let i = 0; i < particles.length; i++) {
       const p = particles[i];
-      const fadeAlpha = Math.sin(p.life * Math.PI) * p.alpha;
-
-      if (fadeAlpha < 0.02) continue;
-
+      const alpha = Math.sin(p.life * Math.PI) * p.alpha;
+      if (alpha < 0.05) continue;
+      ctx.fillStyle = hsl(p.hue, 90, CONFIG.lightnessParticle, alpha);
       ctx.beginPath();
       ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-      ctx.fillStyle = hsl(p.hue, 90, CONFIG.lightnessParticle, fadeAlpha);
-      
-      // Give particles a tiny glow
-      ctx.shadowColor = hsl(p.hue, 90, CONFIG.lightnessParticle, fadeAlpha * 0.5);
-      ctx.shadowBlur = 4;
       ctx.fill();
-      ctx.shadowBlur = 0; // reset
     }
   }
 
-  // ── Loop ───────────────────────────────────────────────────
   function loop(time) {
+    if (!isVisible) return;
     animationId = requestAnimationFrame(loop);
     const dt = time - lastTime;
     lastTime = time;
-
-    if (dt > 200) return;
-
+    if (dt > 100) return;
     update(dt);
     draw();
   }
 
-  // ── Helpers ────────────────────────────────────────────────
   function debounce(fn, ms) {
     let timer;
-    return function () {
-      clearTimeout(timer);
-      timer = setTimeout(fn, ms);
-    };
+    return function () { clearTimeout(timer); timer = setTimeout(fn, ms); };
   }
 
-  // ── Boot ───────────────────────────────────────────────────
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-  } else {
-    init();
-  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
 })();
