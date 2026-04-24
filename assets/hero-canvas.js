@@ -35,15 +35,15 @@
     particleMaxSpeed: 0.7,
 
     // Movement
-    nodeSpeed: 0.6,        
-    nodeDrift: 0.0005,
+    nodeSpeed: 0.35,       // Slower, more elegant flow
+    nodeDrift: 0.0003,
     nodeFriction: 0.985,   
-    maxVelocity: 4.5,      // Reduced to keep movement smooth
+    maxVelocity: 3.5,      // Capped for smoothness
 
     // Mouse Interaction
     mouseRepelRadius: 220, 
-    mouseForce: 0.12,      // Even softer repulsion
-    mouseConnectRadius: 320, // Slightly larger reach for interaction
+    mouseForce: 0.12,      
+    mouseConnectRadius: 320, 
 
     // Colors
     hueMin: 195,
