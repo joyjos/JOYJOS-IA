@@ -35,10 +35,10 @@
     particleMaxSpeed: 0.2,
 
     // Movement
-    nodeSpeed: 0.06,       // Almost static
+    nodeSpeed: 0.15,       // Slow but steady
     nodeDrift: 0.0001,
-    nodeFriction: 0.97,   
-    maxVelocity: 3,      
+    nodeFriction: 0.98,   
+    maxVelocity: 3.5,      
 
     // Mouse Interaction
     mouseRepelRadius: 200, 
@@ -124,8 +124,10 @@
       y: rand(0, height),
       radius: r,
       baseRadius: r,
-      vx: rand(-CONFIG.nodeSpeed, CONFIG.nodeSpeed),
-      vy: rand(-CONFIG.nodeSpeed, CONFIG.nodeSpeed),
+      vx: 0, 
+      vy: 0,
+      speed: CONFIG.nodeSpeed,
+      angle: rand(0, Math.PI * 2),
       hue: h,
       phase: rand(0, Math.PI * 2),
       pulseSpeed: rand(0.005, 0.015),
@@ -259,9 +261,12 @@
     for (let i = 0; i < nodes.length; i++) {
       const n = nodes[i];
       
-      // Movement: Natural drift + Velocity
-      n.vx += Math.sin(elapsed * CONFIG.nodeDrift + n.phase) * 0.005;
-      n.vy += Math.cos(elapsed * CONFIG.nodeDrift + n.phase * 1.3) * 0.005;
+      // Movement: Constant travel with slow rotation
+      n.angle += (Math.sin(elapsed * CONFIG.nodeDrift + n.phase) * 0.002);
+      
+      // Base velocity from angle
+      let targetVx = Math.cos(n.angle) * CONFIG.nodeSpeed;
+      let targetVy = Math.sin(n.angle) * CONFIG.nodeSpeed;
 
       // Mouse Interaction: Repulsion + Agitation
       if (mouse.active) {
@@ -274,42 +279,26 @@
           const dist = Math.sqrt(distSq);
           const forceFactor = (CONFIG.mouseConnectRadius - dist) / CONFIG.mouseConnectRadius;
           
-          // Repulsion (if within repel radius)
           if (dist < CONFIG.mouseRepelRadius) {
             const repelForce = (CONFIG.mouseRepelRadius - dist) / CONFIG.mouseRepelRadius;
             n.vx += (dx / dist) * repelForce * CONFIG.mouseForce;
             n.vy += (dy / dist) * repelForce * CONFIG.mouseForce;
           }
 
-          // Agitation: Increase velocity when near mouse
-          n.vx += (n.vx / (Math.abs(n.vx) || 1)) * forceFactor * CONFIG.mouseAgitation;
-          n.vy += (n.vy / (Math.abs(n.vy) || 1)) * forceFactor * CONFIG.mouseAgitation;
+          n.vx += Math.cos(n.angle) * forceFactor * CONFIG.mouseAgitation;
+          n.vy += Math.sin(n.angle) * forceFactor * CONFIG.mouseAgitation;
         }
       }
 
-      n.x += n.vx;
-      n.y += n.vy;
+      // Final displacement
+      n.x += targetVx + n.vx;
+      n.y += targetVy + n.vy;
       
-      // Apply subtle friction only to keep things under control
+      // Decay interaction velocity
       n.vx *= CONFIG.nodeFriction;
       n.vy *= CONFIG.nodeFriction;
 
-      // Ensure a minimum speed so they don't stop
-      const speedSq = n.vx * n.vx + n.vy * n.vy;
-      const minSpeed = CONFIG.nodeSpeed;
-      if (speedSq < minSpeed * minSpeed) {
-        const speed = Math.sqrt(speedSq) || 0.1;
-        n.vx = (n.vx / speed) * minSpeed;
-        n.vy = (n.vy / speed) * minSpeed;
-      }
-
-      // Cap velocity
-      if (speedSq > CONFIG.maxVelocity * CONFIG.maxVelocity) {
-        const speed = Math.sqrt(speedSq);
-        n.vx = (n.vx / speed) * CONFIG.maxVelocity;
-        n.vy = (n.vy / speed) * CONFIG.maxVelocity;
-      }
-
+      // Pulse
       n.phase += n.pulseSpeed;
       n.radius = n.baseRadius + Math.sin(n.phase) * n.baseRadius * 0.4;
 
@@ -317,7 +306,6 @@
       const buffer = 40; 
       if (n.x < -buffer) n.x = width + buffer;
       else if (n.x > width + buffer) n.x = -buffer;
-      
       if (n.y < -buffer) n.y = height + buffer;
       else if (n.y > height + buffer) n.y = -buffer;
     }
