@@ -1,0 +1,50 @@
+{
+  "specVersion": "1.0",
+  "host": {
+    "displayName": "JOYJOS",
+    "identifier": "did:web:joyjos.eu"
+  },
+  "entries": [
+    {
+      "identifier": "urn:air:joyjos.eu:mcp:services",
+      "displayName": "JOYJOS MCP Server",
+      "type": "application/mcp-server-card+json",
+      "url": "https://joyjos.eu/.well-known/mcp/server-card.json",
+      "representativeQueries": [
+        "automatizaciones de procesos con IA en Espana",
+        "agente IA para atencion al cliente en WhatsApp",
+        "landing page con chatbot de inteligencia artificial"
+      ]
+    },
+    {
+      "identifier": "urn:air:joyjos.eu:skills:consulting",
+      "displayName": "JOYJOS Agent Skills Index",
+      "type": "application/vnd.agentskills.index+json",
+      "url": "https://joyjos.eu/.well-known/agent-skills/index.json",
+      "representativeQueries": [
+        "consultoria de automatizacion e inteligencia artificial para pymes",
+        "solicitar diagnostico gratuito de viabilidad de automatizacion"
+      ]
+    },
+    {
+      "identifier": "urn:air:joyjos.eu:api:catalog",
+      "displayName": "JOYJOS API Catalog (RFC 9727)",
+      "type": "application/linkset+json",
+      "url": "https://joyjos.eu/.well-known/api-catalog",
+      "representativeQueries": [
+        "catalogo de APIs y endpoints de JOYJOS",
+        "especificacion OpenAPI y estado de servicios JOYJOS"
+      ]
+    },
+    {
+      "identifier": "urn:air:joyjos.eu:docs:llmstxt",
+      "displayName": "JOYJOS LLMs Documentation",
+      "type": "text/markdown",
+      "url": "https://joyjos.eu/llms.txt",
+      "representativeQueries": [
+        "servicios y precios orientativos de JOYJOS",
+        "como automatizar tareas repetitivas en un negocio con IA"
+      ]
+    }
+  ]
+}

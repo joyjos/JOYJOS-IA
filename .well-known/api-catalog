@@ -1,0 +1,25 @@
+{
+  "linkset": [
+    {
+      "anchor": "https://joyjos.eu/api",
+      "service-desc": [
+        {
+          "href": "https://joyjos.eu/api/openapi.json",
+          "type": "application/vnd.oai.openapi+json;version=3.1"
+        }
+      ],
+      "service-doc": [
+        {
+          "href": "https://joyjos.eu/llms.txt",
+          "type": "text/markdown"
+        }
+      ],
+      "status": [
+        {
+          "href": "https://joyjos.eu/api/health",
+          "type": "application/json"
+        }
+      ]
+    }
+  ]
+}

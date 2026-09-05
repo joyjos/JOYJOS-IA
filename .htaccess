@@ -20,12 +20,20 @@ RewriteCond %{HTTP_REFERER} !^$
 RewriteCond %{HTTP_REFERER} !^https://joyjos.eu/ [NC]
 RewriteRule \.(jpg|jpeg|png|gif|webp)$ - [F,NC,L]
 
-# 5️⃣ Compresión Gzip para archivos comunes
+# 5️⃣ Negociación de Contenido: Markdown para Agentes de IA
+RewriteCond %{HTTP:Accept} text/markdown [NC]
+RewriteCond %{REQUEST_URI} ^/(index\.html)?$
+RewriteRule ^ /llms.txt [L]
+
+# Permitir acceso directo a .well-known
+RewriteRule ^\.well-known/ - [L]
+
+# 6️⃣ Compresión Gzip para archivos comunes
 <IfModule mod_deflate.c>
-  AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/json
+  AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/json application/linkset+json text/markdown
 </IfModule>
 
-# 6️⃣ Cacheo de navegador para recursos estáticos (1 año para imágenes, CSS, JS)
+# 7️⃣ Cacheo de navegador para recursos estáticos
 <IfModule mod_expires.c>
   ExpiresActive On
   ExpiresByType image/jpeg "access plus 1 year"
@@ -38,9 +46,40 @@ RewriteRule \.(jpg|jpeg|png|gif|webp)$ - [F,NC,L]
   ExpiresByType text/javascript "access plus 1 year"
   ExpiresByType application/javascript "access plus 1 year"
   ExpiresByType application/json "access plus 1 year"
+  ExpiresByType application/linkset+json "access plus 1 hour"
+  ExpiresByType text/markdown "access plus 1 hour"
 </IfModule>
 
-# 7️⃣ Cabeceras de Seguridad Reforzadas
+# 8️⃣ Tipos MIME para endpoints de descubrimiento de agentes
+<Files "api-catalog">
+  ForceType "application/linkset+json; charset=utf-8"
+</Files>
+<Files "oauth-protected-resource">
+  ForceType "application/json; charset=utf-8"
+</Files>
+<Files "oauth-authorization-server">
+  ForceType "application/json; charset=utf-8"
+</Files>
+<Files "openid-configuration">
+  ForceType "application/json; charset=utf-8"
+</Files>
+<Files "health">
+  ForceType "application/json; charset=utf-8"
+</Files>
+<Files "server-card.json">
+  ForceType "application/mcp-server-card+json; charset=utf-8"
+</Files>
+<Files "ai-catalog.json">
+  ForceType "application/json; charset=utf-8"
+</Files>
+<Files "llms.txt">
+  ForceType "text/markdown; charset=utf-8"
+</Files>
+<Files "auth.md">
+  ForceType "text/markdown; charset=utf-8"
+</Files>
+
+# 9️⃣ Cabeceras de Seguridad y Descubrimiento para Agentes
 <IfModule mod_headers.c>
   # Enforce HTTPS (HSTS) - 1 año incl. subdominios y preload
   Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
@@ -55,16 +94,32 @@ RewriteRule \.(jpg|jpeg|png|gif|webp)$ - [F,NC,L]
   Header set Referrer-Policy "strict-origin-when-cross-origin"
   
   # Content Security Policy (CSP) - Blindaje Total
-  # NOTA: Sin 'unsafe-inline' en scripts porque se han movido a assets/main.js
   Header set Content-Security-Policy "default-src 'self'; script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https:; connect-src 'self' https://www.google-analytics.com; frame-ancestors 'none'; object-src 'none';"
   
   # Permissions Policy: Deshabilitar acceso a hardware innecesario
   Header set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=()"
+
+  # Link response headers para descubrimiento de agentes (RFC 8288 & RFC 9727)
+  Header set Link '</.well-known/api-catalog>; rel="api-catalog", </.well-known/ai-catalog.json>; rel="ai-catalog", </.well-known/mcp/server-card.json>; rel="service-desc", </llms.txt>; rel="service-doc", </auth.md>; rel="describedby"'
+
+  # CORS y tokens para recursos de agentes
+  <FilesMatch "^(api-catalog|oauth-protected-resource|oauth-authorization-server|openid-configuration|server-card\.json|ai-catalog\.json|index\.json|openapi\.json|health)$">
+    Header set Access-Control-Allow-Origin "*"
+  </FilesMatch>
+
+  <Files "llms.txt">
+    Header set Access-Control-Allow-Origin "*"
+    Header set x-markdown-tokens "1500"
+  </Files>
+
+  <Files "auth.md">
+    Header set Access-Control-Allow-Origin "*"
+  </Files>
 </IfModule>
 
-# 8️⃣ Deshabilitar firmas del servidor y listado de directorios
+# 🔟 Deshabilitar firmas del servidor y listado de directorios
 Options -Indexes
 ServerSignature Off
 
-# 9️⃣ Evitar bucles de redirección
+# Evitar bucles de redirección
 RewriteCond %{ENV:REDIRECT_STATUS} ^$

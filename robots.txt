@@ -1,5 +1,11 @@
 User-agent: *
 Allow: /
 
+# Content Signals for AI Agents (IETF draft / contentsignals.org)
+Content-Signal: ai-train=no, search=yes, ai-input=no
+
+# Agentic Resource Discovery (ARD / spec §6.1)
+Agentmap: https://joyjos.eu/.well-known/ai-catalog.json
+
 # Sitemap
 Sitemap: https://joyjos.eu/sitemap.xml

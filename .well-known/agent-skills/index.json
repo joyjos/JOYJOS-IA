@@ -1,0 +1,12 @@
+{
+  "$schema": "https://schemas.agentskills.io/discovery/0.2.0/schema.json",
+  "skills": [
+    {
+      "name": "joyjos-consulting",
+      "type": "skill-md",
+      "description": "Consulta de servicios, viabilidad técnica, presupuestos y diagnóstico de automatizaciones con Inteligencia Artificial para pymes y negocios digitales ofrecidos por JOYJOS.",
+      "url": "https://joyjos.eu/.well-known/agent-skills/joyjos-consulting/SKILL.md",
+      "digest": "sha256:ea24edc63fcd7c578ffaa8f751ebc38d6a2ec6bfd35292fd27ffb1cd1cf4bf60"
+    }
+  ]
+}

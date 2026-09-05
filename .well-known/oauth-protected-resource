@@ -1,0 +1,14 @@
+{
+  "resource": "https://joyjos.eu",
+  "authorization_servers": [
+    "https://joyjos.eu"
+  ],
+  "scopes_supported": [
+    "read",
+    "contact",
+    "diagnostics"
+  ],
+  "bearer_methods_supported": [
+    "header"
+  ]
+}

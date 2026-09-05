@@ -236,4 +236,109 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+
+    // 11. WebMCP Agent Discovery & Browser Tools (W3C / Chrome WebMCP)
+    const initWebMCP = () => {
+        if (!('modelContext' in navigator)) return;
+
+        const tools = [
+            {
+                name: 'get_services',
+                description: 'Obtiene el catálogo estructurado de servicios de automatización e inteligencia artificial de JOYJOS.',
+                inputSchema: {
+                    type: 'object',
+                    properties: {
+                        category: {
+                            type: 'string',
+                            enum: ['all', 'whatsapp', 'processes', 'web_chatbots'],
+                            description: 'Categoría de servicios a filtrar'
+                        }
+                    }
+                },
+                execute: async (args) => {
+                    const services = [
+                        {
+                            id: 'whatsapp',
+                            title: 'Atención al cliente por WhatsApp con IA',
+                            description: 'Asistente 24/7 entrenado con la información del negocio para responder consultas, cualificar leads y confirmar citas.',
+                            ideal_for: 'Clínicas, academias, consultas y empresas con alto volumen de mensajes repetitivos.'
+                        },
+                        {
+                            id: 'processes',
+                            title: 'Automatizaciones de procesos',
+                            description: 'Conexión de herramientas (CRM, facturas, email, avisos) para eliminar tareas manuales y repetitivas.',
+                            ideal_for: 'Negocios con tareas repetitivas recurrentes.'
+                        },
+                        {
+                            id: 'web_chatbots',
+                            title: 'Webs y landings con chatbot integrado',
+                            description: 'Diseño y desarrollo web de alta velocidad orientado a conversión con chatbot de IA integrado.',
+                            ideal_for: 'Negocios que buscan captar y cualificar leads de forma continua.'
+                        }
+                    ];
+                    if (args && args.category && args.category !== 'all') {
+                        return services.filter(s => s.id === args.category);
+                    }
+                    return services;
+                }
+            },
+            {
+                name: 'get_pricing',
+                description: 'Consulta rangos de precios orientativos y condiciones de garantía de JOYJOS.',
+                inputSchema: {
+                    type: 'object',
+                    properties: {}
+                },
+                execute: async () => {
+                    return {
+                        pricing: {
+                            simple_automation: 'Desde 300 - 500 €',
+                            complete_ai_agent_project: '1.500 - 3.000 €',
+                            initial_diagnosis: 'Gratuito y sin compromiso'
+                        },
+                        guarantee: '30 días de soporte post-entrega con ajustes ilimitados hasta funcionamiento acordado.',
+                        currency: 'EUR'
+                    };
+                }
+            },
+            {
+                name: 'request_diagnosis',
+                description: 'Consulta los canales oficiales para solicitar diagnóstico inicial gratuito o propuesta de automatización.',
+                inputSchema: {
+                    type: 'object',
+                    properties: {
+                        business_name: { type: 'string', description: 'Nombre o sector del negocio' },
+                        needs: { type: 'string', description: 'Procesos o problemas principales' }
+                    }
+                },
+                execute: async (args) => {
+                    return {
+                        whatsapp: 'https://wa.me/34620193975',
+                        email: 'hola@joyjos.eu',
+                        founder: 'José G. Palacio',
+                        process: 'Diagnóstico en ~15 min, propuesta en 24-48 h, entrega en 1-4 semanas con garantía de 30 días.',
+                        submitted_data: args || {}
+                    };
+                }
+            }
+        ];
+
+        try {
+            if (typeof navigator.modelContext.provideContext === 'function') {
+                navigator.modelContext.provideContext({ tools });
+            }
+            if (typeof navigator.modelContext.registerTool === 'function') {
+                const controller = new AbortController();
+                tools.forEach(tool => {
+                    try {
+                        navigator.modelContext.registerTool(tool, { signal: controller.signal });
+                    } catch (_) {}
+                });
+            }
+        } catch (e) {
+            console.debug('WebMCP registration:', e);
+        }
+    };
+    initWebMCP();
 });
+

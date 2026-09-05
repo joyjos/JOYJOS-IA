@@ -1,0 +1,83 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "JOYJOS Agent & Discovery API",
+    "version": "1.0.0",
+    "description": "Especificación OpenAPI para descubrimiento automatizado de servicios, estado y diagnóstico de JOYJOS (https://joyjos.eu).",
+    "contact": {
+      "name": "JOYJOS",
+      "url": "https://joyjos.eu",
+      "email": "hola@joyjos.eu"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://joyjos.eu",
+      "description": "Servidor de producción"
+    }
+  ],
+  "paths": {
+    "/api/health": {
+      "get": {
+        "summary": "Health status",
+        "description": "Comprueba el estado de disponibilidad del servicio JOYJOS.",
+        "responses": {
+          "200": {
+            "description": "Servicio en línea",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": { "type": "string", "example": "pass" },
+                    "service": { "type": "string", "example": "JOYJOS" },
+                    "version": { "type": "string", "example": "1.0.0" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/llms.txt": {
+      "get": {
+        "summary": "Documentación para LLMs",
+        "description": "Devuelve la base de conocimiento estructurada para modelos de lenguaje y agentes de IA.",
+        "responses": {
+          "200": {
+            "description": "Documentación en Markdown",
+            "content": {
+              "text/markdown": {
+                "schema": { "type": "string" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/agent/auth": {
+      "post": {
+        "summary": "Agent Registration",
+        "description": "Registro e identificación programática de agentes autónomos conforme al estándar Auth.md.",
+        "responses": {
+          "200": {
+            "description": "Registro exitoso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": { "type": "string" },
+                    "access_token": { "type": "string" },
+                    "token_type": { "type": "string", "example": "Bearer" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

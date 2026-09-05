@@ -1,0 +1,21 @@
+{
+  "$schema": "https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/schema/server-card.json",
+  "serverInfo": {
+    "name": "joyjos-mcp-server",
+    "version": "1.0.0",
+    "description": "JOYJOS MCP Server — Servidor oficial para descubrimiento y consulta de servicios de automatización e Inteligencia Artificial."
+  },
+  "endpoint": "https://joyjos.eu/mcp",
+  "capabilities": {
+    "tools": {
+      "listChanged": true
+    },
+    "resources": {
+      "subscribe": false,
+      "listChanged": true
+    },
+    "prompts": {
+      "listChanged": true
+    }
+  }
+}
