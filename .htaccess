@@ -2,6 +2,7 @@
 # .htaccess ULTRA PRO para JOYJOS
 # ==============================================
 
+DirectoryIndex home.html index.html
 ErrorDocument 404 /error404.html 
 
 # 1️⃣ Activar motor de reescritura
@@ -22,7 +23,7 @@ RewriteRule \.(jpg|jpeg|png|gif|webp)$ - [F,NC,L]
 
 # 5️⃣ Negociación de Contenido: Markdown para Agentes de IA
 RewriteCond %{HTTP:Accept} text/markdown [NC]
-RewriteCond %{REQUEST_URI} ^/(index\.html)?$
+RewriteCond %{REQUEST_URI} ^/(home\.html|index\.html)?$
 RewriteRule ^ /llms.txt [L]
 
 # Permitir acceso directo a .well-known

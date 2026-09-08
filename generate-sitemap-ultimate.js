@@ -3,7 +3,7 @@ const path = require('path');
 
 const BASE_URL = 'https://joyjos.eu';
 const SITE_DIR = path.join(__dirname);
-const MAIN_PAGE = 'index.html';
+const MAIN_PAGE = 'home.html';
 
 // Carpetas a ignorar
 const IGNORED_DIRS = ['.agents', 'stitch', 'node_modules', '.git', 'dist', 'build'];
