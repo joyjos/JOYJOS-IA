@@ -99,8 +99,11 @@ RewriteRule ^\.well-known/ - [L]
   # Permissions Policy: Deshabilitar acceso a hardware innecesario
   Header set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=()"
 
+  # Variar caché según el header Accept para negociación de contenido
+  Header append Vary "Accept"
+
   # Link response headers para descubrimiento de agentes (RFC 8288 & RFC 9727)
-  Header set Link '</.well-known/api-catalog>; rel="api-catalog", </.well-known/ai-catalog.json>; rel="ai-catalog", </.well-known/mcp/server-card.json>; rel="service-desc", </llms.txt>; rel="service-doc", </auth.md>; rel="describedby"'
+  Header set Link '</.well-known/api-catalog>; rel="api-catalog", </.well-known/ai-catalog.json>; rel="ai-catalog", </.well-known/mcp/server-card.json>; rel="service-desc", </llms.txt>; rel="service-doc", </llms.txt>; rel="alternate"; type="text/markdown", </auth.md>; rel="describedby"'
 
   # CORS y tokens para recursos de agentes
   <FilesMatch "^(api-catalog|oauth-protected-resource|oauth-authorization-server|openid-configuration|server-card\.json|ai-catalog\.json|index\.json|openapi\.json|health)$">
@@ -110,6 +113,7 @@ RewriteRule ^\.well-known/ - [L]
   <Files "llms.txt">
     Header set Access-Control-Allow-Origin "*"
     Header set x-markdown-tokens "1500"
+    Header set Content-Type "text/markdown; charset=utf-8"
   </Files>
 
   <Files "auth.md">

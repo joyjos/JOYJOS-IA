@@ -8,10 +8,43 @@
         {
           "type": "header",
           "key": "accept",
-          "value": "(.*text/markdown.*)"
+          "value": "text/markdown"
         }
       ],
-      "destination": "/llms.txt"
+      "destination": "/api/markdown"
+    },
+    {
+      "source": "/index.html",
+      "has": [
+        {
+          "type": "header",
+          "key": "accept",
+          "value": "text/markdown"
+        }
+      ],
+      "destination": "/api/markdown"
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "header",
+          "key": "accept",
+          "value": "(?<markdown>.*text/markdown.*)"
+        }
+      ],
+      "destination": "/api/markdown"
+    },
+    {
+      "source": "/index.html",
+      "has": [
+        {
+          "type": "header",
+          "key": "accept",
+          "value": "(?<markdown>.*text/markdown.*)"
+        }
+      ],
+      "destination": "/api/markdown"
     }
   ],
   "headers": [
@@ -43,8 +76,12 @@
           "value": "camera=(), microphone=(), geolocation=(), payment=()"
         },
         {
+          "key": "Vary",
+          "value": "Accept"
+        },
+        {
           "key": "Link",
-          "value": "</.well-known/api-catalog>; rel=\"api-catalog\", </.well-known/ai-catalog.json>; rel=\"ai-catalog\", </.well-known/mcp/server-card.json>; rel=\"service-desc\", </llms.txt>; rel=\"service-doc\", </auth.md>; rel=\"describedby\""
+          "value": "</.well-known/api-catalog>; rel=\"api-catalog\", </.well-known/ai-catalog.json>; rel=\"ai-catalog\", </.well-known/mcp/server-card.json>; rel=\"service-desc\", </llms.txt>; rel=\"service-doc\", </llms.txt>; rel=\"alternate\"; type=\"text/markdown\", </auth.md>; rel=\"describedby\""
         }
       ]
     },
@@ -106,6 +143,31 @@
         {
           "key": "x-markdown-tokens",
           "value": "1500"
+        },
+        {
+          "key": "Vary",
+          "value": "Accept"
+        },
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
+        }
+      ]
+    },
+    {
+      "source": "/api/markdown",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "text/markdown; charset=utf-8"
+        },
+        {
+          "key": "x-markdown-tokens",
+          "value": "1500"
+        },
+        {
+          "key": "Vary",
+          "value": "Accept"
         },
         {
           "key": "Access-Control-Allow-Origin",
