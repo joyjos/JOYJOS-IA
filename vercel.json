@@ -47,12 +47,8 @@
       "destination": "/api/markdown"
     },
     {
-      "source": "/index.html",
-      "destination": "/home.html"
-    },
-    {
-      "source": "/",
-      "destination": "/home.html"
+      "source": "/home.html",
+      "destination": "/index.html"
     }
   ],
   "headers": [

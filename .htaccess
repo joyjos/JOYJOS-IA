@@ -2,7 +2,7 @@
 # .htaccess ULTRA PRO para JOYJOS
 # ==============================================
 
-DirectoryIndex home.html index.html
+DirectoryIndex index.html home.html
 ErrorDocument 404 /error404.html 
 
 # 1️⃣ Activar motor de reescritura

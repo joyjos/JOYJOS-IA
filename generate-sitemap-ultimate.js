@@ -3,7 +3,7 @@ const path = require('path');
 
 const BASE_URL = 'https://joyjos.eu';
 const SITE_DIR = path.join(__dirname);
-const MAIN_PAGE = 'home.html';
+const MAIN_PAGE = 'index.html';
 
 // Carpetas a ignorar
 const IGNORED_DIRS = ['.agents', 'stitch', 'node_modules', '.git', 'dist', 'build'];
@@ -77,6 +77,14 @@ function getHtmlFiles(dir, parent = '') {
   return results;
 }
 
+// Detectar páginas con <meta name="robots" content="noindex">
+const isNoindex = (relativeFile) => {
+  const html = fs.readFileSync(path.join(SITE_DIR, relativeFile), 'utf8');
+  return (html.match(/<meta\b[^>]*>/gi) || []).some(
+    tag => /name=["']robots["']/i.test(tag) && /noindex/i.test(tag)
+  );
+};
+
 // Obtener todas las páginas HTML
 const htmlFiles = getHtmlFiles(SITE_DIR);
 
@@ -85,11 +93,14 @@ const now = new Date().toISOString().split('T')[0];
 
 // Construcción del XML
 let xml = `<?xml version="1.0" encoding="UTF-8"?>\n`;
-xml += `<urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="https://www.google.com/schemas/sitemap-image/1.1">\n\n`;
+xml += `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">\n\n`;
 
 htmlFiles.forEach(file => {
   // ❌ Ignorar error404.html
   if (file.toLowerCase().includes('404')) return;
+
+  // ❌ Ignorar páginas noindex (no deben figurar en el sitemap)
+  if (isNoindex(file)) return;
 
   const urlPath = file === MAIN_PAGE ? '' : file.replace(/\\/g, '/');
 
@@ -105,7 +116,7 @@ htmlFiles.forEach(file => {
     if (ogImage) {
       xml += `    <image:image>\n`;
       xml += `      <image:loc>${BASE_URL}/${ogImage}</image:loc>\n`;
-      xml += `      <image:caption>JOYJOS - Automatización e IA para tu negocio</image:caption>\n`;
+      xml += `      <image:caption>JOYJOS - Software de gestión, webs y automatización para tu negocio</image:caption>\n`;
       xml += `      <image:title>JOYJOS</image:title>\n`;
       xml += `    </image:image>\n`;
     }
