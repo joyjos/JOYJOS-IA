@@ -6,8 +6,8 @@ Este documento contiene las especificaciones técnicas, convenciones de diseño 
 
 ## 1. Descripción del Proyecto y Propósito
 
-**JOYJOS** es una plataforma de servicios/landing page premium orientada a la venta de servicios de automatización de procesos e Inteligencia Artificial para pymes y negocios digitales. 
-- **Propósito**: Captar clientes interesados en automatizaciones, chatbots e integración de IA, transmitiendo una imagen premium, segura, profesional y transparente.
+**JOYJOS** es una plataforma de servicios/landing page premium orientada a la venta de software de gestión a medida, webs para captación de leads y automatización de procesos para pymes y empresas. 
+- **Propósito**: Captar clientes interesados en software de gestión a medida, webs que generen contactos y automatización de procesos, transmitiendo una imagen premium, segura, profesional y transparente.
 - **Enfoque**: Sitios ultra-rápidos, optimizados para SEO y con un estándar estricto de seguridad de la información.
 
 ---
@@ -116,6 +116,7 @@ Este proyecto es una aplicación **estática del lado del cliente** (Client-side
   - `Referrer-Policy` (`strict-origin-when-cross-origin`)
   - `Permissions-Policy` (deshabilita cámara, geolocalización, micrófono)
 - **Ofuscación de Datos**: Para evitar el spam por bots que rastrean el código fuente, la dirección de correo electrónico de contacto (`hola@joyjos.eu`) no debe escribirse directamente en texto plano en el HTML de contacto. Debe cargarse dinámicamente mediante JS usando el atributo `data-email-link`.
+- **Caché de assets y versionado**: `/assets/*` se sirve con `Cache-Control: public, max-age=31536000, immutable` (`vercel.json`), es decir, el navegador no vuelve a pedirlos durante un año. Por eso los HTML enlazan `style.css`, `main.js` y `hero-canvas.js` con un parámetro de versión (`?v=AAAAMMDD`). **Cada vez que cambies alguno de esos tres ficheros, actualiza ese valor en todos los HTML** (`index.html`, `404.html`, `aviso-legal.html`, `cookies.html`, `privacidad.html`, `terminos.html`); si no, los visitantes recurrentes seguirán viendo la versión antigua.
 
 ---
 

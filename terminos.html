@@ -12,7 +12,8 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:ital,wght@0,400;0,500;0,600;0,700;0,800;1,300;1,400&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="assets/style.css">
+    <link rel="stylesheet" href="assets/style.css?v=20261014">
+    <script src="assets/main.js?v=20261014" defer></script>
   </head>
 
   <body class="selection:bg-brand selection:text-white">
@@ -64,7 +65,7 @@
         <p
           class="font-mono text-xs text-gray-500 border-l border-brand/30 pl-4 py-1 uppercase tracking-wider"
         >
-          Última actualización: Abril 2026
+          Última actualización: Octubre 2026
         </p>
       </header>
 
@@ -74,8 +75,8 @@
           Las presentes condiciones generales regulan el acceso, navegación y
           uso del sitio web
           <strong class="text-white font-medium">joyjos.eu</strong>, así como
-          los servicios de automatización e inteligencia artificial prestados
-          bajo la marca JOYJOS.
+          los servicios de desarrollo de software de gestión a medida, webs y
+          automatización de procesos prestados bajo la marca JOYJOS.
         </p>
         <p>
           El acceso a este sitio web y la contratación de cualquier servicio
@@ -86,17 +87,25 @@
 
         <h2>2. Descripción de los Servicios</h2>
         <p>
-          JOYJOS presta servicios de consultoría, diseño e implementación de
-          soluciones basadas en inteligencia artificial y automatización de
+          JOYJOS presta servicios de consultoría, diseño y desarrollo de
+          software de gestión a medida, páginas web y automatización de
           procesos empresariales, incluyendo pero no limitándose a:
         </p>
         <ul>
-          <li>Desarrollo de agentes y asistentes de IA personalizados</li>
           <li>
-            Automatización de flujos de trabajo con herramientas como n8n o Make
+            Desarrollo de software de gestión a medida y herramientas internas
+            (paneles de control, seguimiento de pedidos, clientes, presupuestos
+            o inventario)
+          </li>
+          <li>
+            Diseño y desarrollo de webs y landings orientadas a la captación de
+            clientes, con formularios directos y asistentes inteligentes
+          </li>
+          <li>
+            Automatización de procesos y conexión entre las herramientas del
+            cliente (facturación, correo, avisos y traspaso de datos)
           </li>
           <li>Integración de sistemas y APIs empresariales</li>
-          <li>Consultoría estratégica en transformación digital con IA</li>
         </ul>
         <p>
           Cada proyecto se define mediante un contrato o propuesta específica
@@ -245,62 +254,11 @@
         <p
           class="text-[10px] font-display font-bold tracking-widest uppercase text-gray-600"
         >
-          &copy; <span id="footer-year"></span> JOYJOS. LA INTELIGENCIA QUE
-          TRABAJA.
+          &copy; <span id="footer-year"></span> JOYJOS. SOFTWARE · WEBS ·
+          AUTOMATIZACIÓN.
         </p>
       </div>
     </footer>
 
-    <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        /* --- AÑO DINÁMICO (sin document.write) --- */
-        const yearEl = document.getElementById("footer-year");
-        if (yearEl) yearEl.textContent = new Date().getFullYear();
-
-        /* --- GA CONDICIONAL (RGPD) --- */
-        function loadGA() {
-          if (document.getElementById("ga-script")) return;
-          const s = document.createElement("script");
-          s.id = "ga-script";
-          s.async = true;
-          s.src = "https://www.googletagmanager.com/gtag/js?id=G-S5NCQJME5D";
-          document.head.appendChild(s);
-          s.onload = () => {
-            window.dataLayer = window.dataLayer || [];
-            function gtag() {
-              dataLayer.push(arguments);
-            }
-            window.gtag = gtag;
-            gtag("js", new Date());
-            gtag("config", "G-S5NCQJME5D");
-          };
-        }
-
-        function removeGA() {
-          document.cookie.split(";").forEach((c) => {
-            const name = c.trim().split("=")[0];
-            if (name.startsWith("_ga") || name.startsWith("_gid")) {
-              document.cookie =
-                name +
-                "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=." +
-                location.hostname;
-              document.cookie =
-                name + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-            }
-          });
-        }
-
-        /* --- LEER CONSENTIMIENTO GUARDADO --- */
-        const getConsent = () =>
-          document.cookie
-            .split("; ")
-            .find((row) => row.startsWith("joyjos_cookies="))
-            ?.split("=")[1] || localStorage.getItem("joyjos_cookies");
-
-        const consent = getConsent();
-        if (consent === "accepted") loadGA();
-        else if (consent === "rejected") removeGA();
-      });
-    </script>
   </body>
 </html>

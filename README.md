@@ -1,8 +1,8 @@
-# JOYJOS | Automatización e IA para Negocios
+# JOYJOS | Software de Gestión, Webs y Automatización para Negocios
 
 ![JOYJOS Cover](assets/og_image.png)
 
-**JOYJOS** es una plataforma de servicios especializada en la implementación de Inteligencia Artificial y automatización de procesos para pymes y negocios digitales. Esta landing page ha sido diseñada con un enfoque **premium**, priorizando el rendimiento y la seguridad.
+**JOYJOS** es una plataforma de servicios especializada en el desarrollo de software de gestión a medida, webs para captación de leads y automatización de procesos para pymes y empresas. Esta landing page ha sido diseñada con un enfoque **premium**, priorizando el rendimiento y la seguridad.
 
 ## ✨ Características Principales
 
@@ -10,7 +10,7 @@
 - **Rendimiento Optimizado**: Migración total del CDN de Tailwind CSS a estilos compilados localmente para minimizar el tiempo de carga (TTI).
 - **SEO Ready**: Estructura semántica, metadatos optimizados y generación automática de sitemap.
 - **Responsive Design**: Adaptabilidad total a dispositivos móviles y escritorio.
-- **IA Integrada**: Preparada para la integración de chatbots y agentes de automatización.
+- **Preparada para agentes de IA**: Publica `llms.txt`, un endpoint Markdown (`/api/markdown`) y metadatos de descubrimiento en `.well-known/` para asistentes y agentes de IA.
 
 ## 🛡️ Auditoría de Seguridad y Optimización
 

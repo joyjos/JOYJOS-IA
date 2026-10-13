@@ -4,9 +4,9 @@
     {
       "name": "joyjos-consulting",
       "type": "skill-md",
-      "description": "Consulta de servicios, viabilidad técnica, presupuestos y diagnóstico de automatizaciones con Inteligencia Artificial para pymes y negocios digitales ofrecidos por JOYJOS.",
+      "description": "Consulta de servicios, viabilidad, presupuestos y diagnóstico de proyectos de software de gestión a medida, webs para captación de leads y automatización de procesos para pymes y empresas ofrecidos por JOYJOS.",
       "url": "https://joyjos.eu/.well-known/agent-skills/joyjos-consulting/SKILL.md",
-      "digest": "sha256:ea24edc63fcd7c578ffaa8f751ebc38d6a2ec6bfd35292fd27ffb1cd1cf4bf60"
+      "digest": "sha256:4c56e1bb4f1fc224826b6296af4119f36937e39914400a84852d502e357b8f8e"
     }
   ]
 }

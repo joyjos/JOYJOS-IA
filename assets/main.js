@@ -244,13 +244,13 @@ document.addEventListener('DOMContentLoaded', () => {
         const tools = [
             {
                 name: 'get_services',
-                description: 'Obtiene el catálogo estructurado de servicios de automatización e inteligencia artificial de JOYJOS.',
+                description: 'Obtiene el catálogo estructurado de servicios de JOYJOS: software de gestión a medida, webs para captación de leads y automatización de procesos.',
                 inputSchema: {
                     type: 'object',
                     properties: {
                         category: {
                             type: 'string',
-                            enum: ['all', 'whatsapp', 'processes', 'web_chatbots'],
+                            enum: ['all', 'software', 'web', 'automation'],
                             description: 'Categoría de servicios a filtrar'
                         }
                     }
@@ -258,22 +258,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 execute: async (args) => {
                     const services = [
                         {
-                            id: 'whatsapp',
-                            title: 'Atención al cliente por WhatsApp con IA',
-                            description: 'Asistente 24/7 entrenado con la información del negocio para responder consultas, cualificar leads y confirmar citas.',
-                            ideal_for: 'Clínicas, academias, consultas y empresas con alto volumen de mensajes repetitivos.'
+                            id: 'software',
+                            title: 'Software de gestión a medida',
+                            description: 'Sistemas web y herramientas internas adaptadas a cómo funciona la empresa: paneles de control, seguimiento de pedidos, gestión de clientes o inventario para sustituir hojas de cálculo caóticas y programas genéricos.',
+                            ideal_for: 'Empresas locales, pymes y autónomos cuyos procesos ya no caben en un Excel.'
                         },
                         {
-                            id: 'processes',
-                            title: 'Automatizaciones de procesos',
-                            description: 'Conexión de herramientas (CRM, facturas, email, avisos) para eliminar tareas manuales y repetitivas.',
-                            ideal_for: 'Negocios con tareas repetitivas recurrentes.'
+                            id: 'web',
+                            title: 'Webs para captación de leads',
+                            description: 'Páginas web y landings ultrarrápidas, estructuradas para convertir visitas en clientes reales, con formularios directos y asistentes inteligentes que atienden dudas y cualifican contactos.',
+                            ideal_for: 'Negocios sin web, con una web obsoleta o que no genera contactos comerciales.'
                         },
                         {
-                            id: 'web_chatbots',
-                            title: 'Webs y landings con chatbot integrado',
-                            description: 'Diseño y desarrollo web de alta velocidad orientado a conversión con chatbot de IA integrado.',
-                            ideal_for: 'Negocios que buscan captar y cualificar leads de forma continua.'
+                            id: 'automation',
+                            title: 'Automatización de procesos',
+                            description: 'Conexión de las herramientas que ya se utilizan para eliminar el trabajo manual repetitivo: facturación, traspaso de datos entre aplicaciones, alertas internas y emails de confirmación.',
+                            ideal_for: 'Cualquier negocio con tareas que se repiten a diario o cada semana.'
                         }
                     ];
                     if (args && args.category && args.category !== 'all') {
@@ -284,7 +284,7 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             {
                 name: 'get_pricing',
-                description: 'Consulta rangos de precios orientativos y condiciones de garantía de JOYJOS.',
+                description: 'Consulta cómo presupuesta JOYJOS sus proyectos, el diagnóstico inicial gratuito y las condiciones de garantía.',
                 inputSchema: {
                     type: 'object',
                     properties: {}
@@ -292,23 +292,21 @@ document.addEventListener('DOMContentLoaded', () => {
                 execute: async () => {
                     return {
                         pricing: {
-                            simple_automation: 'Desde 300 - 500 €',
-                            complete_ai_agent_project: '1.500 - 3.000 €',
+                            model: 'Sin tarifas fijas: cada proyecto se presupuesta según el beneficio real que aporta al negocio, con un presupuesto cerrado y claro, sin sorpresas.',
                             initial_diagnosis: 'Gratuito y sin compromiso'
                         },
-                        guarantee: '30 días de soporte post-entrega con ajustes ilimitados hasta funcionamiento acordado.',
-                        currency: 'EUR'
+                        guarantee: '30 días de soporte post-entrega con ajustes incluidos.'
                     };
                 }
             },
             {
                 name: 'request_diagnosis',
-                description: 'Consulta los canales oficiales para solicitar diagnóstico inicial gratuito o propuesta de automatización.',
+                description: 'Consulta los canales oficiales para solicitar el diagnóstico inicial gratuito o una propuesta de proyecto (software de gestión, web o automatización).',
                 inputSchema: {
                     type: 'object',
                     properties: {
                         business_name: { type: 'string', description: 'Nombre o sector del negocio' },
-                        needs: { type: 'string', description: 'Procesos o problemas principales' }
+                        needs: { type: 'string', description: 'Qué se quiere resolver: gestión interna, captación de clientes o tareas repetitivas' }
                     }
                 },
                 execute: async (args) => {
@@ -316,7 +314,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         whatsapp: 'https://wa.me/34620193975',
                         email: 'hola@joyjos.eu',
                         founder: 'José G. Palacio',
-                        process: 'Diagnóstico en ~15 min, propuesta en 24-48 h, entrega en 1-4 semanas con garantía de 30 días.',
+                        process: 'Diagnóstico en ~15 min, propuesta en 24-48 h, entrega en 1-4 semanas con 30 días de soporte post-entrega.',
                         submitted_data: args || {}
                     };
                 }

@@ -1,15 +1,15 @@
-# JOYJOS — Automatización e IA para tu negocio
+# JOYJOS — Software de Gestión a Medida, Webs y Automatización
 
-> Agencia especializada en automatización de procesos e inteligencia artificial para pymes y negocios digitales. Aumenta ventas, reduce costes y ahorra tiempo con soluciones a medida.
+> Desarrollo de software de gestión a medida, webs modernas para captación de leads y automatización de procesos para pymes y empresas. Trato directo con el desarrollador.
 
 ## Información general
 
 - **Sitio web**: https://joyjos.eu
 - **Fundador**: José G. Palacio (Jose)
-- **Cargo**: Fundador y Consultor de IA
+- **Cargo**: Desarrollador de Software y Consultor Digital
 - **Ubicación**: Gijón, Principado de Asturias, España
 - **Área de servicio**: España
-- **Horario**: Lunes a Viernes, 09:00–18:00
+- **Horario**: Lunes a Viernes, 09:00–19:00
 - **Rango de precios**: €€
 - **LinkedIn**: https://www.linkedin.com/in/joyjos/
 - **WhatsApp de contacto**: https://wa.me/34620193975
@@ -17,75 +17,76 @@
 
 ## Descripción del negocio
 
-JOYJOS es un servicio unipersonal de automatización e inteligencia artificial. Jose G. Palacio trabaja directamente con cada cliente, sin intermediarios ni comerciales. Se especializa en crear automatizaciones inteligentes, agentes IA para WhatsApp y webs/landings con chatbot integrado que responden, cualifican leads y cierran citas automáticamente.
+JOYJOS es un servicio unipersonal de desarrollo de software y consultoría digital. Jose G. Palacio trabaja directamente con cada cliente, sin intermediarios ni comerciales. Se especializa en tres áreas: software de gestión a medida para sustituir hojas de cálculo caóticas, webs modernas optimizadas para captar leads y automatización de los procesos repetitivos del día a día.
 
-El enfoque es práctico y honesto: si un negocio no necesita automatización o no es el momento adecuado, se comunica antes de proponer nada.
+El enfoque es práctico y honesto: si el negocio funciona bien con lo que ya tiene, o su web actual es suficiente, se comunica antes de proponer nada.
 
 ## Propuesta de valor
 
-- Respuesta inmediata a clientes 24/7 sin intervención humana
-- Reducción de tareas manuales repetitivas
-- Conexión entre herramientas y sistemas existentes
-- Agentes IA entrenados con la información y el tono del negocio
-- Trato directo con el especialista desde el primer mensaje
-- 30 días de soporte post-entrega con ajustes ilimitados
+- Software diseñado para la operativa real del negocio, sin funciones sobrantes
+- Sin licencias mensuales abusivas por cada usuario
+- Control total y seguridad para los datos de la empresa
+- Webs rápidas pensadas para convertir visitas en solicitudes reales
+- Automatización de tareas repetitivas y conexión entre las herramientas que ya se utilizan
+- Trato directo con el desarrollador desde el primer mensaje
+- 30 días de soporte post-entrega con ajustes incluidos
 - Diagnóstico inicial gratuito y sin compromiso
 
 ## Servicios
 
-### 01 — Atención al cliente por WhatsApp con IA
+### 01 — Software de gestión a medida
 
-Un asistente de IA conectado al WhatsApp del negocio que responde consultas, cualifica clientes, confirma citas y hace seguimiento — 24/7, con el tono e información del negocio.
+Desarrollo de sistemas web y herramientas internas adaptadas exactamente a cómo funciona la empresa. Paneles de control, seguimiento de pedidos, gestión de clientes o inventario para sustituir hojas de cálculo caóticas y programas genéricos que no encajan.
 
 **Características:**
-- Respuesta inmediata a cualquier hora
-- Entrenado con la información y el tono del negocio
-- Escalada a humano cuando es necesario
+- Diseñado para la operativa real, sin funciones sobrantes
+- Sin licencias mensuales abusivas por cada usuario
+- Control total y seguridad para los datos de la empresa
 
-**Ideal para:** clínicas, academias, consultas, negocios con alto volumen de consultas repetitivas por WhatsApp.
+**Ideal para:** empresas locales, pymes y autónomos cuyos procesos ya no caben en un Excel.
 
-**Ejemplo de uso:** Una clínica dental donde el asistente confirma citas, responde preguntas frecuentes y avisa al equipo si hay una urgencia — sin que nadie coja el teléfono.
+**Ejemplo de uso:** Una pyme local que gestionaba clientes y presupuestos en varios Excels dispersos, unificada en un panel web sencillo y accesible desde el móvil o la oficina.
 
 ---
 
-### 02 — Automatizaciones de procesos
+### 02 — Webs para captación de leads
 
-Conexión de herramientas y automatización de tareas manuales: emails, seguimientos, registros en CRM, avisos internos, facturas. Se configura una vez y funciona de forma autónoma.
+Diseño y desarrollo de páginas web y landings ultrarrápidas, atractivas y estructuradas para convertir visitas en clientes reales. Con mensajes claros, formularios directos y asistentes inteligentes que atienden dudas y cualifican contactos al instante.
 
 **Características:**
-- Conexión automática entre herramientas existentes
-- Seguimiento de leads sin intervención manual
-- Avisos, recordatorios y alertas internas automatizadas
+- Carga ultrarrápida y diseño impecable en móvil
+- Formularios y chatbots orientados a captar contactos
+- Optimizada para SEO local y preparada para IA
+
+**Ideal para:** negocios sin web, con una web obsoleta o que no genera contactos comerciales.
+
+**Ejemplo de uso:** Un negocio de servicios que renueva su presencia digital con una web que carga al segundo, transmite confianza inmediata y canaliza solicitudes directamente a su WhatsApp o correo.
+
+---
+
+### 03 — Automatización de procesos
+
+Conexión de las herramientas que ya se utilizan para eliminar el trabajo manual repetitivo: facturación, traspaso de datos entre aplicaciones, alertas internas, emails de confirmación y seguimiento. Se configura una vez y funciona solo.
+
+**Características:**
+- Conexión automática entre las aplicaciones habituales
+- Cero errores humanos en tareas administrativas mecánicas
+- Horas de trabajo ahorradas cada semana para el equipo
 
 **Ideal para:** cualquier negocio con tareas que se repiten a diario o cada semana.
 
-**Ejemplo de uso:** Una inmobiliaria donde cada lead del portal se registra automáticamente en el CRM, recibe un email personalizado y agenda visita — sin intervención manual.
-
----
-
-### 03 — Webs y landings con chatbot integrado
-
-Diseño y desarrollo de web o landing page con chatbot de IA integrado desde el primer día. La web no solo informa: capta, responde y convierte.
-
-**Características:**
-- Landing o web diseñada para convertir
-- Chatbot integrado y entrenado con la información del negocio
-- Captura de leads y agendado de citas de forma automática
-
-**Ideal para:** negocios sin web o con una que no funciona. También para quienes tienen web y solo quieren añadir el chatbot.
-
-**Ejemplo de uso:** Una academia de idiomas con una landing donde el chatbot responde preguntas, recomienda el curso adecuado y agenda una llamada — sin intervención humana.
+**Ejemplo de uso:** Cada vez que entra una solicitud o se aprueba un presupuesto, se crea la ficha en el sistema, se emite la notificación y se actualiza el estado sin tocar nada.
 
 ## Para quién es JOYJOS
 
-JOYJOS trabaja con negocios que quieren crecer sin contratar más personal:
+JOYJOS trabaja con negocios que necesitan orden, digitalizarse y captar más clientes:
 
-- **Negocios locales y de servicios**: clínicas, academias, talleres, restaurantes, inmobiliarias. Si reciben consultas y gestionan citas, hay mucho que automatizar.
-- **Autónomos y freelances**: si el profesional es el negocio, cada hora perdida en tareas repetitivas es una hora que no se factura.
-- **Tiendas online y físicas**: seguimiento de pedidos, atención postventa, recuperación de carritos — todo automatizable.
-- **Equipos pequeños con mucha gestión**: empresas de 2 a 10 personas donde parte del tiempo se va en coordinación y tareas manuales.
+- **Pymes y empresas de servicios**: talleres, distribuidoras, reformas, clínicas, asesorías o instaladores. Si gestionan presupuestos, pedidos, clientes o partes de trabajo y el Excel ya no da abasto.
+- **Autónomos y profesionales**: si el profesional es el negocio, cada hora perdida confeccionando presupuestos a mano, organizando citas o peleando con plantillas es una hora que no se factura.
+- **Negocios con web obsoleta o invisible**: empresas con una web anticuada, lenta o que simplemente no genera contactos comerciales. Se desarrollan webs rápidas pensadas para convertir visitas en solicitudes reales.
+- **Equipos con procesos manuales**: equipos de entre 2 y 15 personas donde parte del tiempo se pierde en coordinación interna y en traspasar datos a mano.
 
-**JOYJOS no trabaja con cualquier empresa.** Si el negocio no recibe consultas frecuentes, no tiene procesos repetitivos o no es el momento de invertir, se comunica honestamente en el diagnóstico gratuito antes de proponer nada.
+**JOYJOS no trabaja con cualquier empresa.** Si la operativa funciona perfectamente con lo que ya se tiene, las hojas de cálculo son suficientes o no se necesita un desarrollo a medida, se comunica con total claridad en el diagnóstico gratuito antes de proponer nada.
 
 ## Proceso de trabajo
 
@@ -98,35 +99,38 @@ JOYJOS trabaja con negocios que quieren crecer sin contratar más personal:
 
 Desde la primera conversación hasta la entrega: entre 1 y 4 semanas según la complejidad.
 
-## Precios orientativos
+## Precios y presupuestos
 
-- **Automatización sencilla**: desde 300–500 €
-- **Proyecto completo con agente IA**: 1.500–3.000 €
+- **Modelo de precio**: no hay tarifas fijas. Las soluciones no tienen un precio fijo, tienen un valor, que se calcula en función del beneficio real que aportan al negocio.
+- **Presupuesto**: cerrado y claro, sin sorpresas.
 - **Diagnóstico inicial**: gratuito y sin compromiso
 
 ## Garantía
 
-Todos los proyectos incluyen una garantía de 30 días post-entrega. Durante ese período se realizan ajustes ilimitados hasta que el sistema funcione exactamente como se acordó. Si algo no funciona bien, se corrige sin coste adicional y sin discusión.
+Todos los proyectos incluyen 30 días de soporte post-entrega. Si algo falla, necesita ajustes o no se comporta como se esperaba, se corrige sin coste adicional. El cliente escribe directamente y se resuelve, sin tickets ni intermediarios.
 
 ## Preguntas frecuentes
 
 **¿Esto es solo para empresas grandes?**
-No. Muchas veces tiene más sentido en negocios pequeños o medianos, donde cada hora cuenta y los cuellos de botella se notan más.
+No, todo lo contrario. Muchas pymes y profesionales locales sufren más el desorden operativo y las webs obsoletas porque no tienen departamentos técnicos enteros. Crear un sistema a medida o una web que convierta visitas en clientes tiene un impacto directo e inmediato en su facturación.
 
-**¿Qué tipo de cosas se pueden automatizar?**
-Respuestas iniciales a clientes, recogida de datos, seguimiento de leads, avisos internos, confirmaciones de citas, recordatorios, conexión entre herramientas, clasificación de mensajes, envío de presupuestos y mucho más.
+**¿Cuánto cuesta?**
+Depende del proyecto. Las soluciones no tienen un precio fijo, tienen un valor, que se calcula en función del beneficio real que aporta al negocio. Se entrega un presupuesto cerrado y claro, sin sorpresas.
+
+**¿Qué tipo de proyectos desarrolla JOYJOS exactamente?**
+Tres áreas principales: software de gestión a medida (paneles para pedidos, clientes, presupuestos o stock), páginas web modernas orientadas a captación de leads, y automatizaciones de procesos entre las herramientas que ya se utilizan (facturación, correo, avisos automáticos).
 
 **¿Cuánto tarda en estar listo?**
-Una automatización sencilla puede estar lista en 3–5 días. Un proyecto más completo con agente IA e integraciones suele llevar 2–4 semanas.
+Depende del alcance. Una automatización sencilla puede estar lista en 3–5 días. Una web moderna de captación suele llevar entre 1 y 2 semanas. Un software de gestión a medida suele requerir 2–4 semanas. Se entrega una estimación cerrada antes de empezar.
 
 **¿Necesito conocimientos técnicos?**
-No. JOYJOS se encarga de todo lo técnico. El cliente solo necesita explicar cómo funciona su negocio.
+Ninguno. JOYJOS se encarga de todo lo técnico. El software o la web se entregan listos para usar, diseñados de forma intuitiva para que cualquier persona del equipo trabaje sin complicaciones ni curvas de aprendizaje.
 
-**¿Y si el resultado no me convence?**
-Se trabaja hasta que funcione. Todos los proyectos incluyen 30 días de soporte post-entrega con ajustes ilimitados.
+**¿Y si el resultado necesita ajustes tras la entrega?**
+Se trabaja hasta que funcione como se esperaba. Todos los proyectos incluyen 30 días de soporte post-entrega. Si algo necesita afinarse o hay dudas, se escribe directamente y se resuelve, sin tickets y sin esperas.
 
 **¿El diagnóstico inicial es realmente gratis?**
-Sí. El cliente describe su caso y se envía una propuesta concreta. Sin compromiso y sin coste.
+Sí. El cliente cuenta su caso, se revisa y, si se puede ayudar, se envía una propuesta concreta. Sin compromiso y sin coste. Si no encajan o no se necesitan los servicios, también se comunica.
 
 ## Contacto
 

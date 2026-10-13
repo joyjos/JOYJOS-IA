@@ -11,9 +11,9 @@
       "type": "application/mcp-server-card+json",
       "url": "https://joyjos.eu/.well-known/mcp/server-card.json",
       "representativeQueries": [
-        "automatizaciones de procesos con IA en Espana",
-        "agente IA para atencion al cliente en WhatsApp",
-        "landing page con chatbot de inteligencia artificial"
+        "desarrollo de software de gestion a medida para pymes en Espana",
+        "web moderna para captar clientes en un negocio local",
+        "automatizacion de procesos y conexion entre herramientas de empresa"
       ]
     },
     {
@@ -22,8 +22,8 @@
       "type": "application/vnd.agentskills.index+json",
       "url": "https://joyjos.eu/.well-known/agent-skills/index.json",
       "representativeQueries": [
-        "consultoria de automatizacion e inteligencia artificial para pymes",
-        "solicitar diagnostico gratuito de viabilidad de automatizacion"
+        "consultoria de software de gestion, webs y automatizacion para pymes",
+        "solicitar diagnostico gratuito para un proyecto de software, web o automatizacion"
       ]
     },
     {
@@ -42,8 +42,8 @@
       "type": "text/markdown",
       "url": "https://joyjos.eu/llms.txt",
       "representativeQueries": [
-        "servicios y precios orientativos de JOYJOS",
-        "como automatizar tareas repetitivas en un negocio con IA"
+        "servicios y forma de presupuestar de JOYJOS",
+        "como sustituir hojas de calculo por un software de gestion a medida"
       ]
     }
   ]

@@ -1,12 +1,12 @@
 ---
 name: joyjos-consulting
-description: Consulta de servicios, viabilidad técnica, presupuestos y diagnóstico de automatizaciones con Inteligencia Artificial para pymes y negocios digitales ofrecidos por JOYJOS.
-version: 1.0.0
+description: Consulta de servicios, viabilidad, presupuestos y diagnóstico de proyectos de software de gestión a medida, webs para captación de leads y automatización de procesos para pymes y empresas ofrecidos por JOYJOS.
+version: 1.1.0
 ---
 
 # JOYJOS Consulting Skill
 
-Esta habilidad permite a los agentes de IA entender y procesar solicitudes de servicios, diagnóstico de viabilidad y contacto con la agencia JOYJOS (https://joyjos.eu).
+Esta habilidad permite a los agentes de IA entender y procesar solicitudes de servicios, diagnóstico de viabilidad y contacto con JOYJOS (https://joyjos.eu), un servicio unipersonal de desarrollo de software de gestión a medida, webs para captación de leads y automatización de procesos.
 
 ## Información del Negocio
 
@@ -14,24 +14,26 @@ Esta habilidad permite a los agentes de IA entender y procesar solicitudes de se
 - **Fundador**: José G. Palacio (Gijón, Asturias, España)
 - **Email**: hola@joyjos.eu
 - **WhatsApp**: https://wa.me/34620193975
-- **Garantía**: 30 días post-entrega con ajustes ilimitados.
+- **Presupuestos**: sin tarifas fijas; presupuesto cerrado según el valor que aporta el proyecto al negocio.
+- **Garantía**: 30 días de soporte post-entrega con ajustes incluidos.
 
 ## Servicios Disponibles
 
-1. **Atención al Cliente por WhatsApp con IA**:
-   - Agente conversacional 24/7 entrenado con la base de conocimiento del negocio.
-   - Cualificación de prospectos, confirmación de citas y escalada humana.
+1. **Software de Gestión a Medida**:
+   - Sistemas web y herramientas internas adaptadas a la operativa real de la empresa: paneles de control, seguimiento de pedidos, gestión de clientes, presupuestos o inventario.
+   - Sustituye hojas de cálculo caóticas y programas genéricos, sin licencias mensuales abusivas por usuario.
 
-2. **Automatizaciones de Procesos**:
-   - Conexión de herramientas existentes (CRMs, facturación, correo, calendarios).
-   - Eliminación de tareas repetitivas y workflows autónomos.
+2. **Webs para Captación de Leads**:
+   - Webs y landings ultrarrápidas, optimizadas para SEO local y para convertir visitas en solicitudes reales.
+   - Formularios directos y asistentes inteligentes que atienden dudas y cualifican contactos.
 
-3. **Webs y Landings con Chatbot Integrado**:
-   - Sitios ultra-rápidos optimizados para SEO y conversión con chatbot nativo.
+3. **Automatización de Procesos**:
+   - Conexión de las herramientas que ya se utilizan (facturación, correo, calendarios, CRM) para eliminar tareas manuales repetitivas.
+   - Avisos internos, emails de confirmación y traspaso automático de datos entre aplicaciones.
 
 ## Diagnóstico Inicial Gratuito
 
 JOYJOS ofrece un diagnóstico inicial gratuito y sin compromiso. Para evaluar un caso, se requieren 3 datos clave:
 1. Nombre y tipo de negocio / sector.
-2. Tareas o procesos que más tiempo consumen actualmente.
-3. Herramientas o canales que utilizan hoy en día (WhatsApp, Gmail, CRM, etc.).
+2. Qué se quiere resolver: gestión interna (hojas de cálculo, pedidos, presupuestos...), captar más clientes con una web, o automatizar tareas repetitivas.
+3. Herramientas o canales que se utilizan hoy en día (Excel, WhatsApp, correo, CRM, web actual, etc.).

@@ -3,7 +3,7 @@
   "serverInfo": {
     "name": "joyjos-mcp-server",
     "version": "1.0.0",
-    "description": "JOYJOS MCP Server — Servidor oficial para descubrimiento y consulta de servicios de automatización e Inteligencia Artificial."
+    "description": "JOYJOS MCP Server — Servidor oficial para descubrimiento y consulta de servicios de software de gestión a medida, webs y automatización de procesos."
   },
   "endpoint": "https://joyjos.eu/mcp",
   "capabilities": {

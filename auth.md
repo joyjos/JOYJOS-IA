@@ -8,7 +8,7 @@ Documentación oficial y especificación de acceso para Agentes de Inteligencia 
 
 Este documento establece los mecanismos mediante los cuales agentes autónomos de IA, crawlers semánticos y sistemas de orquestación pueden autenticarse, registrarse programáticamente y acceder a los recursos de JOYJOS de forma segura y transparente.
 
-- **Servicio**: JOYJOS — Servicios de Automatización de Procesos e Inteligencia Artificial
+- **Servicio**: JOYJOS — Software de Gestión a Medida, Webs y Automatización de Procesos
 - **Identificador de Recurso**: `https://joyjos.eu`
 - **Servidor de Autorización**: `https://joyjos.eu`
 - **Contacto de Seguridad**: `hola@joyjos.eu`
@@ -36,7 +36,7 @@ Los agentes pueden registrarse o identificarse a través del endpoint de registr
 - **Identity Type**: `anonymous`
 - **Credential Type**: `bearer_token`
 - **Claim URI**: `https://joyjos.eu/agent/claim`
-- **Alcance**: Acceso de solo lectura a catálogos públicos, información de servicios, precios orientativos y diagnóstico inicial.
+- **Alcance**: Acceso de solo lectura a catálogos públicos, información de servicios, forma de presupuestar y diagnóstico inicial.
 
 ### 3.2. Aserción de Identidad (Identity Assertion)
 - **Identity Type**: `identity_assertion`
@@ -51,8 +51,8 @@ Los agentes pueden registrarse o identificarse a través del endpoint de registr
 
 | Scope | Descripción | Nivel de Acceso |
 | :--- | :--- | :--- |
-| `read` | Lectura de información de la agencia, servicios y casos de uso. | Público / Anónimo |
-| `diagnostics` | Ejecución y simulación del test de viabilidad de automatizaciones. | Autenticado |
+| `read` | Lectura de información de JOYJOS, servicios y casos de uso. | Público / Anónimo |
+| `diagnostics` | Ejecución y simulación del test de viabilidad de proyectos (software de gestión, web o automatización). | Autenticado |
 | `contact` | Envío automatizado de solicitudes de propuesta o agendado de cita. | Verificado |
 
 ---
