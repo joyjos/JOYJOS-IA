@@ -79,12 +79,12 @@ Conexión de las herramientas que ya se utilizan para eliminar el trabajo manual
 
 ## Para quién es JOYJOS
 
-JOYJOS trabaja con negocios que necesitan orden, digitalizarse y captar más clientes:
+JOYJOS trabaja con negocios que necesitan orden, ganar tiempo y captar más clientes:
 
 - **Pymes y empresas de servicios**: talleres, distribuidoras, reformas, clínicas, asesorías o instaladores. Si gestionan presupuestos, pedidos, clientes o partes de trabajo y el Excel ya no da abasto.
 - **Autónomos y profesionales**: si el profesional es el negocio, cada hora perdida confeccionando presupuestos a mano, organizando citas o peleando con plantillas es una hora que no se factura.
 - **Negocios con web obsoleta o invisible**: empresas con una web anticuada, lenta o que simplemente no genera contactos comerciales. Se desarrollan webs rápidas pensadas para convertir visitas en solicitudes reales.
-- **Equipos con procesos manuales**: equipos de entre 2 y 15 personas donde parte del tiempo se pierde en coordinación interna y en traspasar datos a mano.
+- **Equipos con procesos manuales**: equipos donde alguien copia datos de una herramienta a otra o hay que ir preguntando cómo va cada tarea; se conectan las herramientas que ya usan para que ese trabajo se haga solo.
 
 **JOYJOS no trabaja con cualquier empresa.** Si la operativa funciona perfectamente con lo que ya se tiene, las hojas de cálculo son suficientes o no se necesita un desarrollo a medida, se comunica con total claridad en el diagnóstico gratuito antes de proponer nada.
 
