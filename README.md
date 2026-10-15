@@ -47,9 +47,51 @@ Si deseas clonar este proyecto y trabajar en él localmente:
    node generate-sitemap-ultimate.js
    ```
 
+## 🧠 Skills de IA
+
+Skills (instrucciones especializadas para asistentes de IA) instaladas en [`.agents/skills/`](.agents/skills). El fichero [`skills-lock.json`](skills-lock.json) registra el origen y la huella de cada una.
+
+| Skill | Qué hace | Origen | Licencia |
+|-------|----------|--------|----------|
+| `copywriting` | Escribir y mejorar textos de marketing: home, landings y páginas de servicio | [coreyhaines31/marketingskills](https://github.com/coreyhaines31/marketingskills) | MIT |
+| `seo-audit` | Auditar el SEO técnico y on-page del sitio | [coreyhaines31/marketingskills](https://github.com/coreyhaines31/marketingskills) | MIT |
+| `web-design-guidelines` | Revisar la interfaz según las Web Interface Guidelines (accesibilidad y UX) | [vercel-labs/agent-skills](https://github.com/vercel-labs/agent-skills) | MIT (según su README) |
+| `security-best-practices` | Buenas prácticas de seguridad web: HTTPS, cabeceras, CORS, XSS y CSRF | `supercent-io/skills-template` (repositorio ya no disponible) | No verificable |
+
+Son contenidos de terceros y conservan su licencia original. De `security-best-practices` no se ha podido comprobar la licencia porque su repositorio de origen ya no existe.
+
+<details>
+<summary>Licencia MIT de <code>copywriting</code> y <code>seo-audit</code> (© 2025 Corey Haines)</summary>
+
+```text
+MIT License
+
+Copyright (c) 2025 Corey Haines
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+```
+
+</details>
+
 ## 📄 Licencia
 
-Este proyecto es propiedad de **JOYJOS**. Todos los derechos reservados.
+Este proyecto es propiedad de **JOYJOS**. Todos los derechos reservados, salvo las skills de terceros de `.agents/skills/`, que conservan su licencia original (ver la sección «Skills de IA»).
 
 ---
 *Desarrollado con ❤️ por JOYJOS.*

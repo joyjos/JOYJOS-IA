@@ -26,7 +26,7 @@ El proyecto es un sitio estático minimalista optimizado para evitar sobrecarga 
 
 ```text
 JOYJOS/
-├── .agents/                        # Habilidades (skills) personalizadas para agentes de IA
+├── .agents/skills/                 # Skills de IA instaladas (ver README y skills-lock.json)
 ├── assets/                         # Assets estáticos y código compilado
 │   ├── favicon.ico / .png          # Iconografía oficial
 │   ├── hero-canvas.js              # Animación interactiva de fondo del Hero
@@ -49,6 +49,7 @@ JOYJOS/
 ├── vercel.json                     # Configuración de headers de seguridad y enrutamiento en Vercel
 ├── .htaccess                       # Configuración de seguridad, caché y redirecciones para Apache
 ├── package.json                    # Dependencias de desarrollo y scripts de NPM
+├── skills-lock.json                # Origen y huella de las skills de IA instaladas
 └── README.md                       # Documentación general del proyecto
 ```
 

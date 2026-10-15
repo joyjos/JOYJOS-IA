@@ -28,9 +28,10 @@ Thumbs.db
 *.sublime-workspace
 
 # Agent-specific directories
-.agents/
+# Las skills (.agents/skills/) y skills-lock.json se versionan a propósito; el resto de .agents/ no.
+.agents/*
+!.agents/skills/
 stitch/
-skills-lock.json
 
 # Tool-specific
 .next/
