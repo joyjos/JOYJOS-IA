@@ -1,0 +1,3 @@
+# Se versionan en GitHub (para saber qué skills de IA se usan), pero no se publican en la web.
+/.agents
+/skills-lock.json
